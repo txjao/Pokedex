@@ -1,5 +1,10 @@
 import styled from 'styled-components'
 
-const Card = styled.div`
+export const Container = styled.a`
+
+    border-style: solid;
+
+    height: 180px;
+    width: 180px;
 
 `
