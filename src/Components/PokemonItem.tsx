@@ -3,7 +3,6 @@ import styled from 'styled-components'
 import { useEffect, useState } from "react";
 import "@fontsource/press-start-2p";
 
-
 const Container = styled.div`
     
     border: 8px solid #1F2937;
@@ -21,7 +20,8 @@ const Container = styled.div`
     align-items: center;
 
     a{
-        font-family: 'Press Start 2P';
+        font-size: 10px;
+        font-family: "Press Start 2P";
         text-align: center;
         text-decoration: none;
         color: #6B7280;
@@ -29,37 +29,36 @@ const Container = styled.div`
     }
 
     ::after{
-        content: '999';        
+        content: '1';
 
-        font-family: 'Inter';
-        text-align: end;
+        width: 100%;
 
-        background-color: #fff;
+        display: flex;
+        justify-content: flex-start;
 
-        border: solid 1px;
-        border-radius: 60%;
-
-        height: 16px;
-        width: auto;
-        padding: 4px;        
-
+        font-size: 12px;
+        font-family: "Press Start 2P";
+                
         position: relative;
-        bottom: 11px;
-        right: 50px;
-
-       
+        bottom: 110px;
+        left: 5px;
     }
 
-    margin-left: 500px;
+    margin: 16px;
+
+    :hover{
+       position: relative;
+       bottom: 8px; 
+    }
 
 `
 
-interface CardProps {
+interface PokemonItemProps {
     name: string,
     front_default: string;
 }
 
-export function Card(props: CardProps) {
+export function PokemonItem(props: PokemonItemProps) {
 
 
 
@@ -67,8 +66,10 @@ export function Card(props: CardProps) {
 
         <Container>
             <a href="">
-                <img src='https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png' alt="" />
-                <p>aqaa</p>
+                <div className="icon">
+                    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png" alt="" />
+                </div>
+                bulbasaur
             </a>
         </Container>
 

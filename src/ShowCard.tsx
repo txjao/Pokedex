@@ -1,12 +1,12 @@
 import { Wrapper } from './Components/Wrapper';
 import { GlobalStyle } from "./Styles/Global";
-
+import PokemonCard from './Components/PokemonCard'
 
 function App() {
 
   return (
     <>
-      <Wrapper/>
+      <PokemonCard/>
       <GlobalStyle />
     </>
   )
