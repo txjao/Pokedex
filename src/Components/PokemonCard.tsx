@@ -5,10 +5,14 @@ import "@fontsource/press-start-2p";
 import { Shield, TrendDown } from "phosphor-react";
 
 const Container = styled.div`
-    height: 380px;
-    width: 250px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 
-    background-color: #fff;
+    height: 380px;
+    width: 280px;
+
+    background-color: #E5E7EB;
 
     border: 8px solid #4B5563;
     border-radius: 14px;
@@ -16,7 +20,21 @@ const Container = styled.div`
     .stats-box{
         background-color: #E5E7EB;
     
-        height: 150px;
+        height: 164px;
+
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+
+        border-radius: 0 0 14px 14px;
+    }
+
+    .image-box{
+        display: flex;
+        justify-content: center;
+        background-color: #fff;
+        width: 100%;
+        border-radius: 4px;
     }
 
     .top-info{
@@ -24,6 +42,7 @@ const Container = styled.div`
         flex-direction: row;
         justify-content: space-between;
         width: 70%;
+        margin-left: 8px;
     }
 
 
@@ -43,6 +62,11 @@ const Container = styled.div`
         
     }
 
+    p{
+        margin-left: 8px;
+        color: #6B7280;
+    }
+
     .type{
         font-size: 12px;
     }
@@ -59,20 +83,29 @@ const Container = styled.div`
     .stats{
         display: flex;
         align-items: center;
+        justify-content: center;
         span{
             color: #374151;
         }
         strong{
             color: #374151;
+            margin-left: 4px;
         }
 
         background-color: #fff;
         width: 80px;
+
+        border-radius: 4px;
+        height: 24px;
+
+        margin: 4px;
+        
     }
 
     .bottom-info{
         display: grid;
         grid-template-columns: 1fr 1fr 1fr;
+        width: 100%;
     }
 
 `
@@ -90,8 +123,9 @@ export function PokemonCard(props: PokemonCardProps) {
 
         <Container>
 
+            <div className="image-box">
             <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png" alt="" />
-
+            </div>
             <div className="stats-box">
 
                 <div className="top-info">
@@ -101,7 +135,7 @@ export function PokemonCard(props: PokemonCardProps) {
                     </div>
                 </div>
 
-                <span>Seed Pokémon</span>
+                <p>Seed Pokémon</p>
 
                 <div className="bottom-info">
                     <div className="stats">
