@@ -1694,6 +1694,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"phosphor-react@npm:^1.4.1":
+  version: 1.4.1
+  resolution: "phosphor-react@npm:1.4.1"
+  peerDependencies:
+    react: ">=16"
+  checksum: 94aa316eca7bc64b09f146f7d3578d8bd66bc7dbec8f92b6407a5ab6e86a5f42ef97eeb5ec678f355037a0eaa08a9a5303f26fe5d7491f102e0af3a4686acf2d
+  languageName: node
+  linkType: hard
+
 "picocolors@npm:^1.0.0":
   version: 1.0.0
   resolution: "picocolors@npm:1.0.0"
@@ -1718,6 +1727,7 @@ __metadata:
     "@types/styled-components": ^5.1.26
     "@vitejs/plugin-react": ^3.0.0
     axios: ^1.2.1
+    phosphor-react: ^1.4.1
     react: ^18.2.0
     react-dom: ^18.2.0
     react-router-dom: ^6.5.0

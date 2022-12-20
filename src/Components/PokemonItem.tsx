@@ -1,10 +1,13 @@
 import React from "react";
 import styled from 'styled-components'
 import { useEffect, useState } from "react";
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import "@fontsource/press-start-2p";
 
 const Container = styled.div`
     
+    cursor: pointer;
+
     border: 8px solid #1F2937;
     border-radius: 16px;
 
@@ -19,14 +22,14 @@ const Container = styled.div`
     justify-content: center;
     align-items: center;
 
-    a{
+    
         font-size: 10px;
         font-family: "Press Start 2P";
         text-align: center;
         text-decoration: none;
         color: #6B7280;
         padding: 8px;
-    }
+    
 
     ::after{
         content: '1';
@@ -37,11 +40,10 @@ const Container = styled.div`
         justify-content: flex-start;
 
         font-size: 12px;
-        font-family: "Press Start 2P";
+        color: #1F2937;
                 
         position: relative;
-        bottom: 110px;
-        left: 5px;
+        bottom: 105px;
     }
 
     margin: 16px;
@@ -63,15 +65,14 @@ export function PokemonItem(props: PokemonItemProps) {
 
 
     return (
-
-        <Container>
-            <a href="">
+        <Router>
+            <Container>
                 <div className="icon">
                     <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png" alt="" />
                 </div>
                 bulbasaur
-            </a>
-        </Container>
+            </Container>
+        </Router>
 
     );
 }

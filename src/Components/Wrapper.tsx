@@ -2,6 +2,7 @@ import React from "react";
 import styled from 'styled-components'
 import { useEffect, useState } from "react";
 import { PokemonItem } from "./PokemonItem";
+import { PokemonCard } from "./PokemonCard";
 
 const Container = styled.div`
     
@@ -24,10 +25,17 @@ export function Wrapper(props: PokemonItemProps) {
 
 
     return (
-
+    <>
+        <PokemonCard />
         <Container>
-            <PokemonItem/>
+            <PokemonItem />
+            <PokemonItem />
+            <PokemonItem />
+            <PokemonItem />
+            <PokemonItem />
+            <PokemonItem />
+            <PokemonItem />
         </Container>
-
+    </>
     );
 }
