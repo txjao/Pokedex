@@ -152,11 +152,11 @@ export function PokemonCard(props: PokemonCardProps) {
                         <strong> 0.79m</strong>
                     </div>
                     <div className="stats">
-                        <Shield size={24} weight="fill" />
+                        <Shield size={18} weight="fill" />
                         <strong> Water</strong>
                     </div>
                     <div className="stats">
-                        <Shield size={24} weight="fill" />
+                        <Shield size={18} weight="fill" />
                         <strong> Eletric</strong>
                     </div>
                     <div className="stats">
