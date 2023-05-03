@@ -109,15 +109,7 @@ const Container = styled.div`
     }
 
 `
-
-interface PokemonCardProps {
-    name: string,
-    front_default: string;
-}
-
-export function PokemonCard(props: PokemonCardProps) {
-
-
+export function PokemonCard() {
 
     return (
 

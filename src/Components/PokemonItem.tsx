@@ -1,10 +1,11 @@
 import React from "react";
 import styled from 'styled-components'
 import { useEffect, useState } from "react";
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Route, Link, useNavigate } from "react-router-dom";
 import "@fontsource/press-start-2p";
+import { PokemonType } from "../Types/PokemonType.type";
 
-const Container = styled.div`
+const Container = styled.button`
     
     cursor: pointer;
 
@@ -46,6 +47,10 @@ const Container = styled.div`
         bottom: 105px;
     }
 
+    button{
+        display: hidden;
+    }
+
     margin: 16px;
 
     :hover{
@@ -60,19 +65,30 @@ interface PokemonItemProps {
     front_default: string;
 }
 
-export function PokemonItem(props: PokemonItemProps) {
+export function PokemonItem() {
+    const [pokemon, setPokemon] = useState<PokemonType>({
+    name: "bullbasaulr",
+    number: 1,
+    type: "grass",
+    hp: 0,
+    cp: 0,
+    height: 0,
+    resistance: [],
+    weaknesses: [], 
+    frontDefault: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png",
+    });
 
+    const navigate = useNavigate();
 
 
     return (
-        <Router>
-            <Container>
+            <Container onClick={()=>{
+                navigate('/pokemon/'+{number: 1})
+            }}>
                 <div className="icon">
-                    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png" alt="" />
-                </div>
+                    <img src={pokemon.frontDefault} alt="" />
+                    </div>
                 bulbasaur
             </Container>
-        </Router>
-
     );
 }

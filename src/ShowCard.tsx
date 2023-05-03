@@ -1,6 +1,6 @@
-import { Wrapper } from './Components/Wrapper';
+import { Wrapper } from './Pages/WrapperItens';
 import { GlobalStyle } from "./Styles/Global";
-import PokemonCard from './Components/PokemonCard'
+import {PokemonCard} from './Components/PokemonCard'
 
 function App() {
 
