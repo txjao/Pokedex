@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@fontsource/press-start-2p": "^4.5.11",
-    "axios": "^1.2.1",
+    "axios": "^1.4.0",
     "localforage": "^1.10.0",
     "match-sorter": "^6.3.1",
     "phosphor-react": "^1.4.1",

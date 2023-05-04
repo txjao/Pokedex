@@ -1,9 +1,9 @@
-import React from "react";
+import React, { ReactChildren, ReactNode } from "react";
 import styled from 'styled-components'
 import { useEffect, useState } from "react";
-import { BrowserRouter as Router, Route, Link, useNavigate } from "react-router-dom";
+import { BrowserRouter as Router, Route, Link, useNavigate, useParams } from "react-router-dom";
 import "@fontsource/press-start-2p";
-import { PokemonType } from "../Types/PokemonType.type";
+import { key } from 'localforage';
 
 const Container = styled.button`
     
@@ -22,8 +22,6 @@ const Container = styled.button`
     flex-direction: column;
     justify-content: center;
     align-items: center;
-
-    
         font-size: 10px;
         font-family: "Press Start 2P";
         text-align: center;
@@ -32,8 +30,8 @@ const Container = styled.button`
         padding: 8px;
     
 
-    ::after{
-        content: '1';
+    /* ::after{
+        content: ${props => props.id};
 
         width: 100%;
 
@@ -45,7 +43,7 @@ const Container = styled.button`
                 
         position: relative;
         bottom: 105px;
-    }
+    } */
 
     button{
         display: hidden;
@@ -59,36 +57,23 @@ const Container = styled.button`
     }
 
 `
-
 interface PokemonItemProps {
-    name: string,
+    name: ReactNode,
     front_default: string;
 }
 
-export function PokemonItem() {
-    const [pokemon, setPokemon] = useState<PokemonType>({
-    name: "bullbasaulr",
-    number: 1,
-    type: "grass",
-    hp: 0,
-    cp: 0,
-    height: 0,
-    resistance: [],
-    weaknesses: [], 
-    frontDefault: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png",
-    });
-
+export function PokemonItem(props: PokemonItemProps) {
     const navigate = useNavigate();
-
 
     return (
             <Container onClick={()=>{
-                navigate('/pokemon/'+{number: 1})
+                navigate('/pokemon/'+ 1)
             }}>
                 <div className="icon">
-                    <img src={pokemon.frontDefault} alt="" />
-                    </div>
-                bulbasaur
+                    <img src={props.front_default} alt="" />
+                </div>
+                {props.name}
             </Container>
     );
 }
+

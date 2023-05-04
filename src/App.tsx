@@ -6,7 +6,7 @@ function App() {
 
   return (
     <>
-      <Wrapper/>
+      <Wrapper numberPokemons={0}/>
       <GlobalStyle />
     </>
   )

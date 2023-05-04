@@ -3,6 +3,8 @@ import styled from 'styled-components'
 import { useEffect, useState } from "react";
 import { PokemonCard } from "../Components/PokemonCard";
 import { GlobalStyle } from "../Styles/Global";
+import { Wrapper } from "./WrapperItens";
+import { useParams } from "react-router-dom";
 
 
 const Container = styled.div`
@@ -12,12 +14,11 @@ const Container = styled.div`
 `
 
 export function PokemonInfo() {
-
-    
-
+    const id = useParams();
     return (
         <Container className="main">
             <PokemonCard />
+            <Wrapper numberPokemons={5}/>
             <GlobalStyle />
         </Container>
     );

@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import { useEffect, useState } from "react";
 import { PokemonItem } from "../Components/PokemonItem";
 import { PokemonCard } from "../Components/PokemonCard";
+import { key } from "localforage";
 
 const Container = styled.div`
     
@@ -15,13 +16,27 @@ const Container = styled.div`
     padding: 12px;
 `
 
-export function Wrapper() {
+interface WrapperProps {
+    numberPokemons: number;
+}
 
+export function Wrapper(props: WrapperProps) {
+    const [pokemons, setPokemons] = useState([]);
+
+    useEffect(() => {
+        fetch("https://pokeapi.co/api/v2/pokemon?limit=10&offset=0")
+            .then(async (response) => { 
+                await response.json().then((data) => {
+                    const n = data.results.length - props.numberPokemons;
+                    setPokemons(data.results.slice(0, n));
+                })
+            })
+    }, []);
 
 
     return (
         <Container>
-            <PokemonItem />
+            <PokemonItem name={"bulbasaur"} front_default={"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png"} />
         </Container>
     );
 }
