@@ -1,4 +1,4 @@
-import { Wrapper } from './Pages/WrapperItens';
+import { Wrapper } from './Components/WrapperItens';
 import { GlobalStyle } from "./Styles/Global";
 import {PokemonCard} from './Components/PokemonCard'
 

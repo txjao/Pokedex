@@ -5,7 +5,7 @@ import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
-import { PokemonInfo } from './Pages/PokemonInfo';
+import { PokemonInfo } from './Components/PokemonInfo';
 
 const router = createBrowserRouter([
   {
