@@ -193,7 +193,7 @@ export function PokemonCard(props: PokemonCardProps) {
                     </div>
                 </div>
 
-                <p>Pokémon Number#{props.id}</p>
+                <p>Pokémon Number #{props.id}</p>
 
                 <div className="bottom-info">
                     <div className="stats">
