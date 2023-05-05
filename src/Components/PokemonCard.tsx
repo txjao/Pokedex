@@ -166,7 +166,6 @@ export function PokemonCard(props: PokemonCardProps) {
     useEffect(() => {
         axios.get("https://pokeapi.co/api/v2/pokemon/" + props.id)
             .then((res) => {
-                console.log(res.data)
                 setPokemon(res.data)
             })
     }, [props.id])

@@ -14,7 +14,6 @@ function App() {
     <Container>
       <Wrapper numberPokemons={0}/>
       <GlobalStyle />
-      <div id="sentinel"> fim </div>
     </Container>
   )
 }

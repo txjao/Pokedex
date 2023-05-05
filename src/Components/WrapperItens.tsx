@@ -5,6 +5,10 @@ import { PokemonItem } from "./PokemonItem";
 import { PokemonCard } from "./PokemonCard";
 import { key } from "localforage";
 import axios from "axios";
+import { FramerLogo } from "phosphor-react";
+import { Audio, RotatingLines, RotatingSquare } from 'react-loader-spinner';
+import "@fontsource/press-start-2p";
+
 
 const handleSetGrid = () => {
     if (window.screen.width <= 900 && window.screen.width > 475) {
@@ -25,6 +29,20 @@ const Container = styled.ul`
     padding: 12px;
 `
 
+const Loading = styled.div`
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 8px;
+        font-size: 16px;  
+        color: #6B7280;
+
+        p {
+            font-family: "Press Start 2P", cursive;
+        }
+`
+
 interface WrapperProps {
     numberPokemons: number;
 }
@@ -36,30 +54,36 @@ interface Pokemon {
 
 export function Wrapper(props: WrapperProps) {
     const [pokemons, setPokemons] = useState([]);
-    const [currentPage, setCurrentPage] = useState(102);
+    const [numberRenderPokemons, setnumberRenderPokemons] = useState(102);
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
-        axios.get(`https://pokeapi.co/api/v2/pokemon?limit=${currentPage}&offset=0`)
+        axios.get(`https://pokeapi.co/api/v2/pokemon?limit=${numberRenderPokemons}&offset=0`)
             .then(response => {
+                console.log(response.data.results);
                 setPokemons(response.data.results.splice(props.numberPokemons));
+            }).then(() => {
+                {
+                    setLoading(false);
+                }
             }).catch(error => {
                 console.log(error);
             })
-    }, [])
 
-    // useEffect(() => {
-    //     const intesectObserver = new IntersectionObserver((entries) => {
-    //         console.log("deu certo")
-    //         if (entries.some(entry => entry.isIntersecting)) {
-    //             console.log(currentPage)
-    //             setCurrentPage((currentPageInsideState) => currentPageInsideState+currentPage)
-    //         }
-    //     });
+    }, [numberRenderPokemons])
 
-    //     intesectObserver.observe(document.querySelector("#sentinel"));
 
-    //     return () => intesectObserver.disconnect()
-    // }, []);
+    useEffect(() => {
+        const intesectObserver = new IntersectionObserver((entries) => {
+            if (entries.some((entry) => entry.isIntersecting)) {
+                setLoading(true);
+                setnumberRenderPokemons((numberRenderPokemonsInsideState) => numberRenderPokemonsInsideState + 102);
+            }
+        });
+        intesectObserver.observe(document.querySelector("#sentinel"));
+
+        return () => intesectObserver.disconnect();
+    }, []);
 
     return (
         <>
@@ -69,6 +93,20 @@ export function Wrapper(props: WrapperProps) {
                 })
                 }
             </Container>
+            {loading && (
+                <Loading className="loading">
+                    <p>loading more pokemons</p>
+                    <RotatingSquare
+                        height="24"
+                        width="24"
+                        ariaLabel="rotating-square-loading"
+                        strokeWidth="4"
+                        color="#6B7280"
+                        visible={loading}
+                    />
+                </Loading>
+            )}
+            <div id="sentinel"></div>
         </>
     );
 }
