@@ -6,6 +6,7 @@ import { GlobalStyle } from "../Styles/Global";
 import { Wrapper } from "../Components/WrapperItens";
 import { useNavigate, useParams } from "react-router-dom";
 import { NavigateButton } from "../Components/NavigateButton";
+import { HomeButton } from "../Components/HomeButton";
 
 
 const Container = styled.div`
@@ -39,31 +40,35 @@ export function PokemonInfo() {
 
 
     return (
-        <Container className="main">
-            {id && (
-            <>
-                <div className="card">
+        <>
+        <HomeButton />
+            <Container className="main">
+                {id && (
+                    <>
+                        <div className="card">
 
-                    {window.screen.width > 768 ?
-                        <>
-                            <NavigateButton placeholder="Previous" id={parseInt(id)} />
-                            <PokemonCard id={parseInt(id)} />
-                            <NavigateButton placeholder="Next" id={parseInt(id)} />
-                        </> :
-                        <>
-                            <PokemonCard id={parseInt(id)} />
-                            <div className="mobile">
-                                <NavigateButton placeholder="Previous" id={parseInt(id)} />
-                                <NavigateButton placeholder="Next" id={parseInt(id)} />
-                            </div>
-                        </>
-                    }
-                </div>
-                <Wrapper numberPokemons={parseInt(id)} />
+                            {window.screen.width > 768 ?
+                                <>
+                                    <NavigateButton placeholder="Previous" id={parseInt(id)} />
+                                    <PokemonCard id={parseInt(id)} />
+                                    <NavigateButton placeholder="Next" id={parseInt(id)} />
+
+                                </> :
+                                <>
+                                    <PokemonCard id={parseInt(id)} />
+                                    <div className="mobile">
+                                        <NavigateButton placeholder="Previous" id={parseInt(id)} />
+                                        <NavigateButton placeholder="Next" id={parseInt(id)} />
+                                    </div>
+                                </>
+                            }
+                        </div>
+                        <Wrapper numberPokemons={parseInt(id)} />
+                    </>
+                )}
+                <GlobalStyle />
+
+            </Container>
             </>
-            )}
-            <GlobalStyle />
-
-        </Container>
     );
 }
