@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import { ReactNode, useEffect } from "react";
 import { Params, useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
 
@@ -21,7 +21,8 @@ const Button = styled.button`
 
 
 interface NavigateButtonProps {
-    placeholder: "Next" | "Previous";
+    placeholder: "Next" | "Previous",
+    id: number
 }
 
 export function NavigateButton(props: NavigateButtonProps) {
@@ -30,23 +31,33 @@ export function NavigateButton(props: NavigateButtonProps) {
 
 
     const handleGoToNext = () => {
-        const id = useParams();
-        console.log(id)
-        const nextId = + id + 1;
+        const nextId = + props.id + 1;
         const url = `/pokemon/${nextId}`;
         navigate(url);
+        window.location.reload();
     };
 
     const handleGoToPrevious = () => {
-        const id = useParams();
-        const previousId = + id - 1;
+        const previousId = + props.id - 1;
         const url = `/pokemon/${previousId}`;
         navigate(url);
+        window.location.reload();
     };
 
-    return (<></>
-        // <Button onClick={props.placeholder == "Next" ? handleGoToNext() : handleGoToPrevious()}>
-        //     {props.placeholder}
-        // </Button>
+    const handleGoToHome = () => {
+        if (props.id < 1) {
+            navigate("/")
+            window.location.reload();
+        }
+    }
+    handleGoToHome()
+
+    return (
+        <Button onClick={() => {
+            props.placeholder == "Next" ? handleGoToNext() : handleGoToPrevious()
+
+        }}>
+            {props.placeholder}
+        </Button>
     )
 }

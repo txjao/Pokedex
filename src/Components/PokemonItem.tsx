@@ -91,6 +91,7 @@ export function PokemonItem(props: PokemonItemProps) {
     return (
         <Container onClick={() => {
             navigate('/pokemon/' + pokemon.id)
+            window.location.reload();
         }}>
             <p>{pokemon.id}</p>
             <div>

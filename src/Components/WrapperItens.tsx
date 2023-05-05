@@ -6,14 +6,21 @@ import { PokemonCard } from "./PokemonCard";
 import { key } from "localforage";
 import axios from "axios";
 
+const handleSetGrid = () => {
+    if (window.screen.width <= 900 && window.screen.width > 475) {
+        return `1fr 1fr 1fr 1fr`
+    } else if (window.screen.width <= 475) {
+        return `1fr 1fr`
+    } else {
+        return `1fr 1fr 1fr 1fr 1fr 1fr`
+    }
+}
+
 const Container = styled.div`
-    
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-columns: ${handleSetGrid()};
     justify-items: center;
-
-    width: 80%;
-
+    overflow-y: auto;
     padding: 12px;
 `
 
@@ -29,30 +36,22 @@ interface Pokemon {
 export function Wrapper(props: WrapperProps) {
     const [pokemons, setPokemons] = useState([]);
 
-
-
     useEffect(() => {
-        axios.get(`https://pokeapi.co/api/v2/pokemon?limit=100`)
+        axios.get(`https://pokeapi.co/api/v2/pokemon?limit=102`)
             .then(response => {
-                const numPokemons = response.data.results.length - props.numberPokemons;
-                setPokemons(response.data.results.slice(0, numPokemons));
+                setPokemons(response.data.results.splice(props.numberPokemons));
             }).catch(error => {
                 console.log(error);
             })
-    }, []);
-
-    console.log(pokemons)
-
-
-
-    return (
+    }, [])
+    return (<>
         <Container>
             {pokemons.map((pokemon: Pokemon, key) => {
                 return <PokemonItem key={key} url={pokemon.url} />
             })
-             
-        }
-            
+            }
         </Container>
+        <Container id="sentinel"/>
+        </>
     );
 }

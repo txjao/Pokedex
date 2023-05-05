@@ -2,7 +2,11 @@ import React from "react";
 import styled from 'styled-components'
 import { useEffect, useState } from "react";
 import "@fontsource/press-start-2p";
-import { Shield, TrendDown } from "phosphor-react";
+import { Heart, Lightning, Shield, Sword } from "phosphor-react";
+import axios from "axios";
+import { useParams } from "react-router-dom";
+
+const id = useParams()
 
 const Container = styled.div`
     display: flex;
@@ -40,8 +44,8 @@ const Container = styled.div`
     .top-info{
         display: flex;
         flex-direction: row;
-        justify-content: space-between;
-        width: 70%;
+        justify-content: flex-start;
+        width: 100%;
         margin-left: 8px;
     }
 
@@ -73,6 +77,7 @@ const Container = styled.div`
 
     .name{
         font-size: 22px;
+        margin-right: 12px;
     }
 
     img{
@@ -83,7 +88,7 @@ const Container = styled.div`
     .stats{
         display: flex;
         align-items: center;
-        justify-content: center;
+        justify-content: space-evenly;
         span{
             color: #374151;
         }
@@ -108,22 +113,104 @@ const Container = styled.div`
         width: 100%;
     }
 
+    ::after{
+        content: ${id};
+        background-color: #374151;
+        border-radius: 100%;
+        height: 36px;
+        width: 36px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: #fff;
+        font-weight: bold;
+        font-size: 20px;
+        position: relative;
+        top: 2px;
+        left: 12px;
+        z-index: 10px;
+        padding: 0 2px 0 2px;
+    }
 `
-export function PokemonCard() {
+interface Pokemon {
+    sprites: {
+        other: {
+            "official-artwork": {
+                front_default: string
+            },
+        }
+    }
+    name: string,
+    types: [{
+        type: {
+            name: string;
+        },
+    }],
+    stats: [{
+        base_stat: number
+        stat: {
+            name: string
+        }
+    }]
+    weight: number,
+    height: number
+}
+
+interface PokemonCardProps {
+    id: number
+}
+
+export function PokemonCard(props: PokemonCardProps) {
+    const [pokemon, setPokemon] = useState<Pokemon>({
+        sprites: {
+            other: {
+                "official-artwork": {
+                    front_default: ""
+                },
+            }
+        },
+        name: "",
+        types: [{
+            type: {
+                name: ""
+            },
+        }],
+        stats: [{
+            base_stat: 0,
+            stat: {
+                name: ""
+            }
+        }],
+        weight: 0,
+        height: 0
+    })
+
+    useEffect(() => {
+        axios.get("https://pokeapi.co/api/v2/pokemon/" + props.id)
+            .then((res) => {
+                setPokemon(res.data)
+            })
+    }, [props.id])
+
+    let pokemonName = "";
+    let pokemonType = "";
 
     return (
-
         <Container>
-
             <div className="image-box">
-            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png" alt="" />
+                <img src={pokemon.sprites.other["official-artwork"].front_default} alt=""/>
             </div>
             <div className="stats-box">
-
                 <div className="top-info">
-                    <strong className="name"> Bulbasaur</strong>
+                    {pokemon.name && (
+                        pokemonName = pokemon.name[0].toUpperCase() + pokemon.name.substring(1),
+                        <strong className="name"> {pokemonName}</strong>
+                    )}
                     <div className="container-type">
-                        <strong className="type">Grass</strong>
+                        {pokemon.types[0].type.name && (
+                            pokemonType = pokemon.types[0].type.name[0].toUpperCase() + pokemon.types[0].type.name.substring(1),
+                            <strong className="type">{pokemonType}</strong>
+                        )}
                     </div>
                 </div>
 
@@ -131,33 +218,49 @@ export function PokemonCard() {
 
                 <div className="bottom-info">
                     <div className="stats">
-                        <span>HP</span>
-                        <strong> 1071</strong>
+                    <Heart size={18} weight="fill" />
+                        <strong> {pokemon.stats[0].base_stat}</strong>
                     </div>
-
                     <div className="stats">
-                        <span>CP</span>
-                        <strong> 951</strong>
+                    <Sword size={18} weight="fill" />
+                        {pokemon.stats.length > 2 && (
+                            pokemon.stats.map((stat) => {
+                                if (stat.stat.name == "attack") {
+                                    return <strong> {stat.base_stat}</strong>
+                                }
+                            })
+                        )}
+                    </div>
+                    <div className="stats">
+                        <span>H</span>
+                        <strong> {(pokemon.height) / 10}m</strong>
+                    </div>
+                    <div className="stats">
+                    <Lightning size={18} weight="fill" />
+                    {pokemon.stats.length > 2 && (
+                            pokemon.stats.map((stat) => {
+                                if (stat.stat.name == "speed") {
+                                    return <strong> {stat.base_stat}</strong>
+                                }
+                            })
+                        )}
+                    </div>
+                    <div className="stats">
+                        <Shield size={18} weight="fill" />
+                        {pokemon.stats.length > 2 && (
+                            pokemon.stats.map((stat) => {
+                                if (stat.stat.name == "defense") {
+                                    return <strong> {stat.base_stat}</strong>
+                                }
+                            })
+                        )}
                     </div>
                     <div className="stats">
                         <span>W</span>
-                        <strong> 0.79m</strong>
-                    </div>
-                    <div className="stats">
-                        <Shield size={18} weight="fill" />
-                        <strong> Water</strong>
-                    </div>
-                    <div className="stats">
-                        <Shield size={18} weight="fill" />
-                        <strong> Eletric</strong>
-                    </div>
-                    <div className="stats">
-                        <TrendDown size={24} weight="fill" />
-                        <strong> Fire</strong>
+                        <strong> {(pokemon.weight) / 10}Kg</strong>
                     </div>
                 </div>
             </div>
         </Container>
-
     );
 }
