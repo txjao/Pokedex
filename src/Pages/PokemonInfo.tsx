@@ -33,7 +33,7 @@ const Container = styled.div`
 
 export function PokemonInfo() {
     const param = useParams();
-    const id = param.id
+    const id = param.id?.toString();
     const navigate = useNavigate();
 
 
