@@ -16,8 +16,9 @@ const handleSetGrid = () => {
     }
 }
 
-const Container = styled.div`
+const Container = styled.ul`
     display: grid;
+    flex-direction: column;
     grid-template-columns: ${handleSetGrid()};
     justify-items: center;
     overflow-y: auto;
@@ -35,23 +36,39 @@ interface Pokemon {
 
 export function Wrapper(props: WrapperProps) {
     const [pokemons, setPokemons] = useState([]);
+    const [currentPage, setCurrentPage] = useState(102);
 
     useEffect(() => {
-        axios.get(`https://pokeapi.co/api/v2/pokemon?limit=102`)
+        axios.get(`https://pokeapi.co/api/v2/pokemon?limit=${currentPage}&offset=0`)
             .then(response => {
                 setPokemons(response.data.results.splice(props.numberPokemons));
             }).catch(error => {
                 console.log(error);
             })
     }, [])
-    return (<>
-        <Container>
-            {pokemons.map((pokemon: Pokemon, key) => {
-                return <PokemonItem key={key} url={pokemon.url} />
-            })
-            }
-        </Container>
-        <Container id="sentinel"/>
+
+    // useEffect(() => {
+    //     const intesectObserver = new IntersectionObserver((entries) => {
+    //         console.log("deu certo")
+    //         if (entries.some(entry => entry.isIntersecting)) {
+    //             console.log(currentPage)
+    //             setCurrentPage((currentPageInsideState) => currentPageInsideState+currentPage)
+    //         }
+    //     });
+
+    //     intesectObserver.observe(document.querySelector("#sentinel"));
+
+    //     return () => intesectObserver.disconnect()
+    // }, []);
+
+    return (
+        <>
+            <Container>
+                {pokemons.map((pokemon: Pokemon, key) => {
+                    return <PokemonItem key={key} url={pokemon.url} />
+                })
+                }
+            </Container>
         </>
     );
 }

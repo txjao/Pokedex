@@ -5,6 +5,7 @@ import { GlobalStyle } from "./Styles/Global";
 const Container = styled.div`
   display: flex;
   justify-content: center;
+  flex-direction: column;
 `
 
 function App() {
@@ -13,6 +14,7 @@ function App() {
     <Container>
       <Wrapper numberPokemons={0}/>
       <GlobalStyle />
+      <div id="sentinel"> fim </div>
     </Container>
   )
 }

@@ -6,7 +6,7 @@ import "@fontsource/press-start-2p";
 import { key } from 'localforage';
 import axios from "axios";
 
-const Container = styled.button`
+const Container = styled.li`
     
     cursor: pointer;
 

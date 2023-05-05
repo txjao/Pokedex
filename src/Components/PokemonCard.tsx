@@ -6,8 +6,6 @@ import { Heart, Lightning, Shield, Sword } from "phosphor-react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 
-const id = useParams()
-
 const Container = styled.div`
     display: flex;
     flex-direction: column;
@@ -112,25 +110,6 @@ const Container = styled.div`
         grid-template-columns: 1fr 1fr 1fr;
         width: 100%;
     }
-
-    ::after{
-        content: ${id};
-        background-color: #374151;
-        border-radius: 100%;
-        height: 36px;
-        width: 36px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        color: #fff;
-        font-weight: bold;
-        font-size: 20px;
-        position: relative;
-        top: 2px;
-        left: 12px;
-        z-index: 10px;
-        padding: 0 2px 0 2px;
-    }
 `
 interface Pokemon {
     sprites: {
@@ -184,10 +163,10 @@ export function PokemonCard(props: PokemonCardProps) {
         weight: 0,
         height: 0
     })
-
     useEffect(() => {
         axios.get("https://pokeapi.co/api/v2/pokemon/" + props.id)
             .then((res) => {
+                console.log(res.data)
                 setPokemon(res.data)
             })
     }, [props.id])
@@ -214,7 +193,7 @@ export function PokemonCard(props: PokemonCardProps) {
                     </div>
                 </div>
 
-                <p>Seed Pokémon</p>
+                <p>Pokémon Number#{props.id}</p>
 
                 <div className="bottom-info">
                     <div className="stats">
