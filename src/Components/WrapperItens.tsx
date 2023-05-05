@@ -80,7 +80,12 @@ export function Wrapper(props: WrapperProps) {
                 setnumberRenderPokemons((numberRenderPokemonsInsideState) => numberRenderPokemonsInsideState + 102);
             }
         });
-        intesectObserver.observe(document.querySelector("#sentinel"));
+
+        const sentinelElement = document.querySelector("#sentinel");
+
+        if (sentinelElement) {
+            intesectObserver.observe(sentinelElement);
+        }
 
         return () => intesectObserver.disconnect();
     }, []);
