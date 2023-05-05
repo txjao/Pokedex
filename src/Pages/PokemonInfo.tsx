@@ -36,33 +36,34 @@ export function PokemonInfo() {
     const id = param.id
     const navigate = useNavigate();
 
-    
-    
+
+
     return (
         <Container className="main">
-            {id && (<>
-            <div className="card">
-             
-                {window.screen.width > 768 ?
-                    <>
-                        <NavigateButton placeholder="Previous" id={parseInt(id)} />
-                        <PokemonCard id={parseInt(id)} />
-                        <NavigateButton placeholder="Next" id={parseInt(id)} />
-                    </> :
-                    <>
-                        <PokemonCard id={parseInt(id)} />
-                        <div className="mobile">
-                        <NavigateButton placeholder="Previous" id={parseInt(id)} />
-                        <NavigateButton placeholder="Next" id={parseInt(id)} />
-                        </div>
-                    </>
-    }
-            </div>
-            <Wrapper numberPokemons={parseInt(id)} />
+            {id && (
+            <>
+                <div className="card">
+
+                    {window.screen.width > 768 ?
+                        <>
+                            <NavigateButton placeholder="Previous" id={parseInt(id)} />
+                            <PokemonCard id={parseInt(id)} />
+                            <NavigateButton placeholder="Next" id={parseInt(id)} />
+                        </> :
+                        <>
+                            <PokemonCard id={parseInt(id)} />
+                            <div className="mobile">
+                                <NavigateButton placeholder="Previous" id={parseInt(id)} />
+                                <NavigateButton placeholder="Next" id={parseInt(id)} />
+                            </div>
+                        </>
+                    }
+                </div>
+                <Wrapper numberPokemons={parseInt(id)} />
             </>
             )}
             <GlobalStyle />
-            
-            </Container>
+
+        </Container>
     );
 }
