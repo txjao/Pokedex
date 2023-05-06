@@ -13,7 +13,7 @@ const Container = styled.li`
     border: 8px solid #1F2937;
     border-radius: 16px;
 
-    height: 8.5rem;
+    height: 9.5rem;
     width: 8.5rem;
 
     background-color: #F3F4F6;
