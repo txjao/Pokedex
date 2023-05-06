@@ -45,6 +45,7 @@ const Loading = styled.div`
 
 interface WrapperProps {
     numberPokemons: number;
+    numberRenderPokemons: number;
 }
 
 interface Pokemon {
@@ -58,7 +59,8 @@ export function Wrapper(props: WrapperProps) {
     const [loading, setLoading] = useState(false);
 
     useEffect(() => {
-        axios.get(`https://pokeapi.co/api/v2/pokemon?limit=${numberRenderPokemons}&offset=0`)
+        if(props.numberPokemons > 102) {
+            axios.get(`https://pokeapi.co/api/v2/pokemon?limit=${props.numberPokemons * 2}&offset=0`)
             .then(response => {
                 console.log(response.data.results);
                 setPokemons(response.data.results.splice(props.numberPokemons));
@@ -69,7 +71,19 @@ export function Wrapper(props: WrapperProps) {
             }).catch(error => {
                 console.log(error);
             })
-
+        } else{
+            axios.get(`https://pokeapi.co/api/v2/pokemon?limit=${numberRenderPokemons}&offset=0`)
+            .then(response => {
+                console.log(response.data.results);
+                setPokemons(response.data.results.splice(props.numberPokemons));
+            }).then(() => {
+                {
+                    setLoading(false);
+                }
+            }).catch(error => {
+                console.log(error);
+            })
+        }
     }, [numberRenderPokemons])
 
 
