@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { Wrapper } from './Components/WrapperItens';
 import { GlobalStyle } from "./Styles/Global";
+import { Search } from './Components/Search';
 
 const Container = styled.div`
   display: flex;

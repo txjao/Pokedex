@@ -8,6 +8,7 @@ import axios from "axios";
 import { FramerLogo } from "phosphor-react";
 import { Audio, RotatingLines, RotatingSquare } from 'react-loader-spinner';
 import "@fontsource/press-start-2p";
+import { Search } from "./Search";
 
 
 const handleSetGrid = () => {
@@ -25,7 +26,6 @@ const Container = styled.ul`
     flex-direction: column;
     grid-template-columns: ${handleSetGrid()};
     justify-items: center;
-    overflow-y: auto;
     padding: 12px;
 `
 
@@ -39,7 +39,7 @@ const Loading = styled.div`
         color: #6B7280;
 
         p {
-            font-family: "Press Start 2P", cursive;
+            font-family: "Press Start 2P";
         }
 `
 
