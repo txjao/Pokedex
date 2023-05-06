@@ -45,7 +45,7 @@ const Loading = styled.div`
 
 interface WrapperProps {
     numberPokemons: number;
-    numberRenderPokemons: number;
+    numberRenderPokemons?: number;
 }
 
 interface Pokemon {
